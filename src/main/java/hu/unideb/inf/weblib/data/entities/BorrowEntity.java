@@ -2,6 +2,7 @@ package hu.unideb.inf.weblib.data.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 @Entity
 @Table(name = "borrow")
@@ -18,6 +19,17 @@ public class BorrowEntity {
     private Date borrowdate;
     @Column(name = "duedate")
     private Date duedate;
+
+    @OneToMany(cascade = CascadeType.ALL) //Egy kölcsönzés alatt lehet több könyv, de a könyv leltári száma egyedi
+    @JoinTable(name = "bookborrow",
+            joinColumns = {@JoinColumn(name = "borrow_id")} ,
+            inverseJoinColumns = {@JoinColumn(name = "book_id")}
+    )
+    private List<BookEntity> bookEntities;
+
+    @ManyToOne(cascade = CascadeType.ALL) // Egy olvasónak több lejáratú kölcsönzései lehetnek
+    @JoinColumn(name = "reader_id", referencedColumnName = "osz")
+    private ReaderEntity reader;
 
     public BorrowEntity() {
     }
