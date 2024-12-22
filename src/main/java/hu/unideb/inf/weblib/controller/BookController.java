@@ -23,4 +23,14 @@ public class BookController {
     public BookEntity saveBook(@RequestBody BookEntity entity) {
         return repository.save(entity);
     }
+
+    @PutMapping("/updatebook")
+    public BookEntity updateRuha(@RequestBody BookEntity entity){
+        return repository.save(entity);
+    }
+    // /api/deleteruha?id=x
+    @DeleteMapping("/deletebook")
+    public void deleteRuha(@RequestParam Long lsz){
+        repository.deleteById(lsz);
+    }
 }

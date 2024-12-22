@@ -23,7 +23,7 @@ public class BorrowEntity {
     @OneToMany(cascade = CascadeType.ALL) //Egy kölcsönzés alatt lehet több könyv, de a könyv leltári száma egyedi
     @JoinTable(name = "bookborrow",
             joinColumns = {@JoinColumn(name = "borrow_id")} ,
-            inverseJoinColumns = {@JoinColumn(name = "book_id")}
+            inverseJoinColumns = {@JoinColumn(name = "LSz")}
     )
     private List<BookEntity> bookEntities;
 
