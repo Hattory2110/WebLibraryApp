@@ -43,6 +43,21 @@ public class BookController {
         return repository.findAllByWriter(writer);
     }
 
+    @GetMapping("/filteredbook")
+    public List<BookEntity> getFilteredRuha(@RequestParam(required = false) String title,
+                                            @RequestParam(required = false) String genre,
+                                            @RequestParam(required = false) String writer,
+                                            @RequestParam(required = false) String publisher,
+                                            @RequestParam(required = false) String date){
+        return repository.findAll().stream()
+                .filter(x -> title == null || x.getTitle().equals(title))
+                .filter(x -> genre == null || x.getGenre().equals(genre))
+                .filter(x -> writer == null || x.getWriter().equals(writer))
+                .filter(x -> publisher == null || x.getPubisher().equals(publisher))
+                .filter(x -> date == null || x.getDate().equals(date))
+                .toList();
+    }
+
     @PostMapping("/savebook")
     public BookEntity saveBook(@RequestBody BookEntity entity) {
         return repository.save(entity);
