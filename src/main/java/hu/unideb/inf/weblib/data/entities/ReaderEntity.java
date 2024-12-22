@@ -25,11 +25,11 @@ public class ReaderEntity implements UserDetails {
     private String cim;
     @Column(name = "nem")
     private String nem;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "telefonszam")
     private String telefon;
-    @Column(name = "jelszo")
+    @Column(name = "jelszo", nullable = false)
     private String jelszo;
 
     @Enumerated(EnumType.STRING)

@@ -79,6 +79,27 @@ public class BookManagementServiceImpl implements BookManagementService {
     }
 
     @Override
+    public List<BookDTO> bookByTitleDb(String title) {
+        List<BookEntity> bookSorted = repo.findAllByTitle(title);
+
+        return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
+    }
+
+    @Override
+    public List<BookDTO> bookByGenreDb(String genre) {
+        List<BookEntity> bookSorted = repo.findAllByGenre(genre);
+
+        return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
+    }
+
+    @Override
+    public List<BookDTO> bookByPublisherDb(String publisher) {
+        List<BookEntity> bookSorted = repo.findAllByPubisher(publisher);
+
+        return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
+    }
+
+    @Override
     public List<BookDTO> bookByParams(String title, String genre, String writer, String publisher) {
         List<BookEntity> bookSorted = repo.findAllByTitleAndGenreAndWriterAndPubisher(title, genre, writer, publisher);
 

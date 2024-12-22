@@ -28,7 +28,7 @@ public class JwtServiceImpl implements JwtService {
         userDetails.getAuthorities().forEach(authority -> extraClaims.put(authority.getAuthority(), authority));
         return Jwts.builder().claims(extraClaims).subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis()+300000))
+                .expiration(new Date(System.currentTimeMillis()+3000000))
                 .signWith(getKey())
                 .compact();
     }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/book")
 public class BookController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class BookController {
     }
 
 
-    @GetMapping("/book/{writer}")
+    @GetMapping("/{writer}")
     public List<BookDTO> getBookByWriter(@PathVariable String writer){
         List<BookDTO> bookSorted = new ArrayList<>();
         bookSorted = service.findAll()
@@ -37,9 +37,24 @@ public class BookController {
     }
 
 
-    @GetMapping("/book")
+    @GetMapping("/book_writer")
     public List<BookDTO> getBookByWriterDb(@RequestParam String writer){
         return service.bookByWriterDb(writer);
+    }
+
+    @GetMapping("/book_title")
+    public List<BookDTO> getBookByTitleDb(@RequestParam String title){
+        return service.bookByWriterDb(title);
+    }
+
+    @GetMapping("/book_genre")
+    public List<BookDTO> getBookByGenreDb(@RequestParam String genre){
+        return service.bookByWriterDb(genre);
+    }
+
+    @GetMapping("/book_publisher")
+    public List<BookDTO> getBookByPublisherDb(@RequestParam String publisher){
+        return service.bookByWriterDb(publisher);
     }
 
     @GetMapping("/filteredbook")
@@ -61,12 +76,12 @@ public class BookController {
     }
 
     @PutMapping("/updatebook")
-    public BookDTO updateRuha(@RequestBody BookDTO dto){
+    public BookDTO updateBook(@RequestBody BookDTO dto){
         return service.update(dto);
     }
 
     @DeleteMapping("/deletebook")
-    public void deleteRuha(@RequestParam Long lsz){
+    public void deleteBook(@RequestParam Long lsz){
         service.delete(lsz);
     }
 }

@@ -2,9 +2,7 @@ package hu.unideb.inf.weblib.service;
 
 import hu.unideb.inf.weblib.service.dto.BookDTO;
 
-import java.util.Date;
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public interface BookManagementService {
 
@@ -16,5 +14,12 @@ public interface BookManagementService {
 
     List<BookDTO> bookByWriter(String writer);
     List<BookDTO> bookByWriterDb(String writer);
+
+    List<BookDTO> bookByTitleDb(String title);
+
+    List<BookDTO> bookByPublisherDb(String publisher);
+
+    List<BookDTO> bookByGenreDb(String genre);
+
     List<BookDTO> bookByParams(String title, String genre, String writer, String publisher);
 }
