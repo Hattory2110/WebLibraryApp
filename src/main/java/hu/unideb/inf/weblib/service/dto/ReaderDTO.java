@@ -1,7 +1,5 @@
 package hu.unideb.inf.weblib.service.dto;
 
-import jakarta.persistence.Column;
-
 import java.util.Date;
 import java.util.Objects;
 public class ReaderDTO {
@@ -14,8 +12,21 @@ public class ReaderDTO {
     private String email;
     private String telefon;
     private String jelszo;
+    private String jogosultsag;
 
     public ReaderDTO() {
+    }
+
+    public ReaderDTO(long osz, String nev, Date szuldate, String cim, String nem, String email, String telefon, String jelszo, String jogosultsag) {
+        this.osz = osz;
+        this.nev = nev;
+        this.szuldate = szuldate;
+        this.cim = cim;
+        this.nem = nem;
+        this.email = email;
+        this.telefon = telefon;
+        this.jelszo = jelszo;
+        this.jogosultsag = jogosultsag;
     }
 
     public ReaderDTO(long osz, String nev, Date szuldate, String cim, String nem, String email, String telefon, String jelszo) {
@@ -93,16 +104,24 @@ public class ReaderDTO {
         this.jelszo = jelszo;
     }
 
+    public String getJogosultsag() {
+        return jogosultsag;
+    }
+
+    public void setJogosultsag(String jogosultsag) {
+        this.jogosultsag = jogosultsag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReaderDTO readerDTO = (ReaderDTO) o;
-        return osz == readerDTO.osz && Objects.equals(nev, readerDTO.nev) && Objects.equals(szuldate, readerDTO.szuldate) && Objects.equals(cim, readerDTO.cim) && Objects.equals(nem, readerDTO.nem) && Objects.equals(email, readerDTO.email) && Objects.equals(telefon, readerDTO.telefon) && Objects.equals(jelszo, readerDTO.jelszo);
+        return osz == readerDTO.osz && Objects.equals(nev, readerDTO.nev) && Objects.equals(szuldate, readerDTO.szuldate) && Objects.equals(cim, readerDTO.cim) && Objects.equals(nem, readerDTO.nem) && Objects.equals(email, readerDTO.email) && Objects.equals(telefon, readerDTO.telefon) && Objects.equals(jelszo, readerDTO.jelszo) && Objects.equals(jogosultsag, readerDTO.jogosultsag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(osz, nev, szuldate, cim, nem, email, telefon, jelszo);
+        return Objects.hash(osz, nev, szuldate, cim, nem, email, telefon, jelszo, jogosultsag);
     }
 }

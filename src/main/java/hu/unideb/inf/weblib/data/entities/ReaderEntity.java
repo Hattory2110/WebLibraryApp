@@ -16,7 +16,7 @@ public class ReaderEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long osz; //Olvasó szám
+    private Long osz; //Olvasó szám
     @Column(name = "nev")
     private String nev;
     @Column(name = "szuletesi_datum")
