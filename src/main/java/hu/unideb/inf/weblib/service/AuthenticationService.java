@@ -6,11 +6,11 @@ import org.springframework.security.core.Authentication;
 
 public interface AuthenticationService {
 
-    public ReaderDTO regisztracio(String email, String password);
+    public String regisztracio(String email, String password);
 
     //Contains optional fields
-    public ReaderDTO regisztracioOpt(ReaderDTO felhasznalo);
+    public String regisztracioOpt(ReaderDTO felhasznalo);
 
 //    public Authentication  bejelentkezes(String email, String password);
-    public Authentication bejelentkezes(ReaderDTO felhasznalo);
+    public String bejelentkezes(ReaderDTO felhasznalo);
 }

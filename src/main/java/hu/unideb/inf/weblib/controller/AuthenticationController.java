@@ -16,17 +16,17 @@ public class AuthenticationController {
     AuthenticationService authenticationService;
 
     @PostMapping("/reg_opt")
-    public ReaderDTO registracioOpt(@RequestBody ReaderDTO felhasznalo) {
+    public String registracioOpt(@RequestBody ReaderDTO felhasznalo) {
         return authenticationService.regisztracioOpt(felhasznalo);
     }
 
     @PostMapping("/reg")
-    public ReaderDTO registracio(@RequestBody String email, String password) {
+    public String registracio(@RequestBody String email, String password) {
         return authenticationService.regisztracio(email, password);
     }
 
     @PostMapping("/login")
-    public void bejelentkezes(@RequestBody ReaderDTO felhasznaloDto){
-        authenticationService.bejelentkezes(felhasznaloDto);
+    public String bejelentkezes(@RequestBody ReaderDTO felhasznaloDto){
+        return authenticationService.bejelentkezes(felhasznaloDto);
     }
 }

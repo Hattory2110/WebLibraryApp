@@ -113,6 +113,18 @@ public class ReaderEntity implements UserDetails {
         this.jelszo = jelszo;
     }
 
+    public void setOsz(Long osz) {
+        this.osz = osz;
+    }
+
+    public Authorization getJogosultsag() {
+        return jogosultsag;
+    }
+
+    public void setJogosultsag(Authorization jogosultsag) {
+        this.jogosultsag = jogosultsag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
