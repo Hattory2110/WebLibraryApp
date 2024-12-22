@@ -17,5 +17,12 @@ public class WebLibraryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WebLibraryApplication.class, args);
+
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper mapper = new ModelMapper();
+        return mapper;
     }
 }
