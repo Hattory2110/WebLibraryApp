@@ -18,19 +18,16 @@ public class BookEntity {
     private String writer;
     @Column(name = "pubisher", nullable = false)
     private String pubisher;
-    @Column(name = "date", nullable = false)
-    private Date date;
 
     public BookEntity() {
     }
 
-    public BookEntity(long lsz, String title, String genre, String writer, String pubisher, Date date) {
+    public BookEntity(long lsz, String title, String genre, String writer, String pubisher, Integer releaseYear) {
         this.lsz = lsz;
         this.title = title;
         this.genre = genre;
         this.writer = writer;
         this.pubisher = pubisher;
-        this.date = date;
     }
 
     public long getLsz() {
@@ -73,24 +70,17 @@ public class BookEntity {
         this.pubisher = pubisher;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookEntity that = (BookEntity) o;
-        return lsz == that.lsz && date == that.date && Objects.equals(title, that.title) && Objects.equals(genre, that.genre) && Objects.equals(writer, that.writer) && Objects.equals(pubisher, that.pubisher);
+        return lsz == that.lsz && Objects.equals(title, that.title) && Objects.equals(genre, that.genre) && Objects.equals(writer, that.writer) && Objects.equals(pubisher, that.pubisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lsz, title, genre, writer, pubisher, date);
+        return Objects.hash(lsz, title, genre, writer, pubisher);
     }
 }

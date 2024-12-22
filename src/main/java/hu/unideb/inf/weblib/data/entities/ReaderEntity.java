@@ -1,13 +1,18 @@
 package hu.unideb.inf.weblib.data.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "reader")
-public class ReaderEntity {
+public class ReaderEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,6 +31,9 @@ public class ReaderEntity {
     private String telefon;
     @Column(name = "jelszo")
     private String jelszo;
+
+    @Enumerated(EnumType.STRING)
+    private Authorization jogosultsag;
 
     public ReaderEntity() {
     }
@@ -116,5 +124,20 @@ public class ReaderEntity {
     @Override
     public int hashCode() {
         return Objects.hash(osz, nev, szuldate, cim, nem, email, telefon, jelszo);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(jogosultsag.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return jelszo;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 }

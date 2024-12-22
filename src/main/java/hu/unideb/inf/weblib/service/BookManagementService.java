@@ -16,5 +16,5 @@ public interface BookManagementService {
 
     List<BookDTO> bookByWriter(String writer);
     List<BookDTO> bookByWriterDb(String writer);
-    List<BookDTO> bookByParams(String title, String genre, String writer, String publisher, Date date);
+    List<BookDTO> bookByParams(String title, String genre, String writer, String publisher);
 }

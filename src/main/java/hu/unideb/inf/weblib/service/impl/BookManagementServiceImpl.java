@@ -47,7 +47,6 @@ public class BookManagementServiceImpl implements BookManagementService {
         dto.setGenre(entity.getGenre());
         dto.setWriter(entity.getWriter());
         dto.setPubisher(entity.getPubisher());
-        dto.setDate(entity.getDate());
         return dto;
     }
 
@@ -80,8 +79,8 @@ public class BookManagementServiceImpl implements BookManagementService {
     }
 
     @Override
-    public List<BookDTO> bookByParams(String title, String genre, String writer, String publisher, Date date) {
-        List<BookEntity> bookSorted = repo.findAllByTitleAndGenreAndWriterAndPubisherAndDate(title, genre, writer, publisher, date);
+    public List<BookDTO> bookByParams(String title, String genre, String writer, String publisher) {
+        List<BookEntity> bookSorted = repo.findAllByTitleAndGenreAndWriterAndPubisher(title, genre, writer, publisher);
 
         return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
     }

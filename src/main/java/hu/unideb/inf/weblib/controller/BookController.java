@@ -1,15 +1,10 @@
 package hu.unideb.inf.weblib.controller;
 
-import hu.unideb.inf.weblib.data.entities.BookEntity;
-import hu.unideb.inf.weblib.data.repositories.BookRepository;
 import hu.unideb.inf.weblib.service.BookManagementService;
 import hu.unideb.inf.weblib.service.dto.BookDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,23 +37,22 @@ public class BookController {
     }
 
 
-//    @GetMapping("/book")
-//    public List<BookDTO> getBookByWriterDb(@RequestParam String writer){
-//        return repository.findAllByWriter(writer);
-//    }
+    @GetMapping("/book")
+    public List<BookDTO> getBookByWriterDb(@RequestParam String writer){
+        return service.bookByWriterDb(writer);
+    }
 
     @GetMapping("/filteredbook")
     public List<BookDTO> getFilteredBook(@RequestParam(required = false) String title,
                                             @RequestParam(required = false) String genre,
                                             @RequestParam(required = false) String writer,
                                             @RequestParam(required = false) String publisher,
-                                            @RequestParam(required = false) String date){
+                                            @RequestParam(required = false) Integer date){
         return service.findAll().stream()
                 .filter(x -> title == null || x.getTitle().equals(title))
                 .filter(x -> genre == null || x.getGenre().equals(genre))
                 .filter(x -> writer == null || x.getWriter().equals(writer))
                 .filter(x -> publisher == null || x.getPubisher().equals(publisher))
-                .filter(x -> date == null || x.getDate().equals(date))
                 .toList();
     }
 
