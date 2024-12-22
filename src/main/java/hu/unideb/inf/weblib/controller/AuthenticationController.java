@@ -1,6 +1,7 @@
 package hu.unideb.inf.weblib.controller;
 
 import hu.unideb.inf.weblib.service.AuthenticationService;
+import hu.unideb.inf.weblib.service.dto.LoginDTO;
 import hu.unideb.inf.weblib.service.dto.ReaderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public String bejelentkezes(@RequestBody ReaderDTO felhasznaloDto){
-        return authenticationService.bejelentkezes(felhasznaloDto);
+    public String bejelentkezes(@RequestBody LoginDTO loginDTO){
+        return authenticationService.bejelentkezes(loginDTO);
     }
 }

@@ -1,6 +1,7 @@
 package hu.unideb.inf.weblib.service;
 
 import hu.unideb.inf.weblib.data.entities.ReaderEntity;
+import hu.unideb.inf.weblib.service.dto.LoginDTO;
 import hu.unideb.inf.weblib.service.dto.ReaderDTO;
 import org.springframework.security.core.Authentication;
 
@@ -12,5 +13,5 @@ public interface AuthenticationService {
     public String regisztracioOpt(ReaderDTO felhasznalo);
 
 //    public Authentication  bejelentkezes(String email, String password);
-    public String bejelentkezes(ReaderDTO felhasznalo);
+    public String bejelentkezes(LoginDTO loginDTO);
 }

@@ -5,6 +5,7 @@ import hu.unideb.inf.weblib.data.entities.ReaderEntity;
 import hu.unideb.inf.weblib.data.repositories.ReaderRepository;
 import hu.unideb.inf.weblib.service.AuthenticationService;
 import hu.unideb.inf.weblib.service.JwtService;
+import hu.unideb.inf.weblib.service.dto.LoginDTO;
 import hu.unideb.inf.weblib.service.dto.ReaderDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +65,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public String bejelentkezes(ReaderDTO felhasznalo) {
+    public String bejelentkezes(LoginDTO loginDTO) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(felhasznalo.getEmail(),
-                        felhasznalo.getJelszo())
+                new UsernamePasswordAuthenticationToken(loginDTO.getEmail(),
+                        loginDTO.getJelszo())
         );
-        var user = readerRepository.findByEmail(felhasznalo.getEmail());
+        var user = readerRepository.findByEmail(loginDTO.getEmail());
         return jwtService.generateToken(user);
     }
 

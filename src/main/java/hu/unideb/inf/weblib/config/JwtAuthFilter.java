@@ -1,7 +1,6 @@
 package hu.unideb.inf.weblib.config;
 
-import hu.unideb.inf.weblib.data.entities.ReaderEntity;
-import hu.unideb.inf.weblib.security.UserDetailsServieImpl;
+import hu.unideb.inf.weblib.security.UserDetailsServiceImpl;
 import hu.unideb.inf.weblib.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +24,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     JwtService jwtService;
 
     @Autowired
-    UserDetailsServieImpl userDetailsServie;
+    UserDetailsServiceImpl userDetailsServie;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

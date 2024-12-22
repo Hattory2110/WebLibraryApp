@@ -46,8 +46,7 @@ public class BookController {
     public List<BookDTO> getFilteredBook(@RequestParam(required = false) String title,
                                             @RequestParam(required = false) String genre,
                                             @RequestParam(required = false) String writer,
-                                            @RequestParam(required = false) String publisher,
-                                            @RequestParam(required = false) Integer date){
+                                            @RequestParam(required = false) String publisher){
         return service.findAll().stream()
                 .filter(x -> title == null || x.getTitle().equals(title))
                 .filter(x -> genre == null || x.getGenre().equals(genre))
