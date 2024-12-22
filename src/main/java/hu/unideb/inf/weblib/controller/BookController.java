@@ -2,11 +2,14 @@ package hu.unideb.inf.weblib.controller;
 
 import hu.unideb.inf.weblib.data.entities.BookEntity;
 import hu.unideb.inf.weblib.data.repositories.BookRepository;
+import hu.unideb.inf.weblib.service.BookManagementService;
+import hu.unideb.inf.weblib.service.dto.BookDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    BookRepository repository;
+    BookManagementService service;
 
     @GetMapping("/books")
     public String books(){
@@ -23,33 +26,34 @@ public class BookController {
     }
 
     @GetMapping("/allbook")
-    public List<BookEntity> getAllBook(){
-        return repository.findAll();
+    public List<BookDTO> getAllBook(){
+        return service.findAll();
     }
 
 
     @GetMapping("/book/{writer}")
-    public List<BookEntity> getBookByWriter(@PathVariable String meret){
-        List<BookEntity> meretValogatott = new ArrayList<>();
-        meretValogatott = repository.findAll()
+    public List<BookDTO> getBookByWriter(@PathVariable String writer){
+        List<BookDTO> bookSorted = new ArrayList<>();
+        bookSorted = service.findAll()
                 .stream()
-                .filter(x -> x.getWriter().equals(meret))
+                .filter(x -> x.getWriter().equals(writer))
                 .toList();
-        return meretValogatott;
-    }
-    // /ruha?meret=M
-    @GetMapping("/ruha")
-    public List<BookEntity> getBookByWriterDb(@RequestParam String writer){
-        return repository.findAllByWriter(writer);
+        return bookSorted;
     }
 
+
+//    @GetMapping("/book")
+//    public List<BookDTO> getBookByWriterDb(@RequestParam String writer){
+//        return repository.findAllByWriter(writer);
+//    }
+
     @GetMapping("/filteredbook")
-    public List<BookEntity> getFilteredRuha(@RequestParam(required = false) String title,
+    public List<BookDTO> getFilteredBook(@RequestParam(required = false) String title,
                                             @RequestParam(required = false) String genre,
                                             @RequestParam(required = false) String writer,
                                             @RequestParam(required = false) String publisher,
                                             @RequestParam(required = false) String date){
-        return repository.findAll().stream()
+        return service.findAll().stream()
                 .filter(x -> title == null || x.getTitle().equals(title))
                 .filter(x -> genre == null || x.getGenre().equals(genre))
                 .filter(x -> writer == null || x.getWriter().equals(writer))
@@ -59,17 +63,17 @@ public class BookController {
     }
 
     @PostMapping("/savebook")
-    public BookEntity saveBook(@RequestBody BookEntity entity) {
-        return repository.save(entity);
+    public BookDTO saveBook(@RequestBody BookDTO dto) {
+        return service.save(dto);
     }
 
     @PutMapping("/updatebook")
-    public BookEntity updateRuha(@RequestBody BookEntity entity){
-        return repository.save(entity);
+    public BookDTO updateRuha(@RequestBody BookDTO dto){
+        return service.update(dto);
     }
-    // /api/deleteruha?id=x
+
     @DeleteMapping("/deletebook")
     public void deleteRuha(@RequestParam Long lsz){
-        repository.deleteById(lsz);
+        service.delete(lsz);
     }
 }

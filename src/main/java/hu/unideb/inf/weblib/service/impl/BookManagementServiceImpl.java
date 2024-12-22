@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -59,5 +60,29 @@ public class BookManagementServiceImpl implements BookManagementService {
     @Override
     public BookDTO update(BookDTO dto) {
         return save(dto);
+    }
+
+    @Override
+    public List<BookDTO> bookByWriter(String writer) {
+        List<BookEntity> bookSorted = new ArrayList<>();
+        bookSorted = repo.findAll()
+                .stream()
+                .filter(x -> x.getWriter().equals(writer))
+                .toList();
+        return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
+    }
+
+    @Override
+    public List<BookDTO> bookByWriterDb(String writer) {
+        List<BookEntity> bookSorted = repo.findAllByWriter(writer);
+
+        return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
+    }
+
+    @Override
+    public List<BookDTO> bookByParams(String title, String genre, String writer, String publisher, Date date) {
+        List<BookEntity> bookSorted = repo.findAllByTitleAndGenreAndWriterAndPubisherAndDate(title, genre, writer, publisher, date);
+
+        return modelMapper.map(bookSorted, new TypeToken<List<BookDTO>>(){}.getType());
     }
 }
