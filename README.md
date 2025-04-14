@@ -1,4 +1,4 @@
-#WebLibrary application
+# WebLibrary application
 
 This repository contains a webapplication made for university project.\
 The application achieves a basic weblibrary. 
